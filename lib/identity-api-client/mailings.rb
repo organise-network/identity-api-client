@@ -33,8 +33,6 @@ module IdentityApiClient
       end
     end
 
-    mailing_api_path
-
     def search(query)
       resp = client.get_request(route_url("/api/mailings/search?query=#{query}&api_token=#{client.connection.configuration.options[:api_token]}"))
       if resp.status == 200
