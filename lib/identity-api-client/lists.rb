@@ -10,7 +10,7 @@ module IdentityApiClient
         'callback_url' => callback_url
       }
       resp = client.post_request('/api/lists/create_from_csv', params)
-      return resp.status == 200
+      return resp.status == 202
     end
 
     def find_by_id(id)
