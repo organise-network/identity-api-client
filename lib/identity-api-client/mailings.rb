@@ -25,7 +25,7 @@ module IdentityApiClient
         'api_token' => client.connection.configuration.options[:api_token],
         'mailing' => mailing_attributes
       }
-      resp = client.post_request(route_url('/api/mailings'), params)
+      resp = client.post_request(route_url('/api/mailings/new'), params)
       if resp.status < 400
         return IdentityApiClient::Mailing.new(client: client, id: resp.body['id'])
       else
