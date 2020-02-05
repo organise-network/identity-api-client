@@ -37,7 +37,7 @@ module IdentityApiClient
       params = {
         'api_token' => client.connection.configuration.options[:api_token]
       }
-      resp = client.post_request("/api/mailings/#{id}/clone", params)
+      resp = client.post_request(route_url("/api/mailings/#{id}/clone"), params)
       if resp.status == 201
         return resp.body['mailing_id']
       else
