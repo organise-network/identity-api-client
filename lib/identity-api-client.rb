@@ -11,6 +11,7 @@ require 'identity-api-client/lists'
 require 'identity-api-client/mailing'
 require 'identity-api-client/mailings'
 require 'identity-api-client/member'
+require 'identity-api-client/members'
 require 'identity-api-client/search'
 require 'identity-api-client/searches'
 
