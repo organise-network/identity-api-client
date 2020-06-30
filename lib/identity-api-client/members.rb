@@ -22,8 +22,8 @@ module IdentityApiClient
       resp.body
     end
 
-    def bulk_upsert(members)
-      params = {'members' => members, 'api_token' => client.connection.configuration.options[:api_token]}
+    def bulk_upsert(members, callback_url = nil)
+      params = {'members' => members, 'api_token' => client.connection.configuration.options[:api_token], 'callback_url' => callback_url }
 
       resp = client.put_request('/api/member/bulk_upsert', params)
       if resp.status < 400
