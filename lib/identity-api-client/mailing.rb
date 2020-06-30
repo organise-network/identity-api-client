@@ -26,12 +26,20 @@ module IdentityApiClient
     end
 
     def send_sample(email)
-      resp = client.post_request(route_url("/api/mailings/#{id}/send_sample"), {email: email})
+      params = {
+        'api_token' => client.connection.configuration.options[:api_token],
+        'email' => email
+      }
+      resp = client.post_request(route_url("/api/mailings/#{id}/send_sample"), params)
       resp.status == 202
     end
 
-    def send_mailing(search_id)
-      resp = client.post_request(route_url("/api/mailings/#{id}/send"), {search_id: search_id})
+    def send_mailing(search_id = nil)
+      params = {
+        'api_token' => client.connection.configuration.options[:api_token],
+        'search_id' => search_id
+      }
+      resp = client.post_request(route_url("/api/mailings/#{id}/send"), params)
       resp.status == 202
     end
   end
