@@ -27,7 +27,7 @@ module IdentityApiClient
 
       resp = client.put_request('/api/member/bulk_upsert', params)
       if resp.status < 400
-        return resp.body.map { |member| IdentityApiClient::Member.new(client: client, id: member['id']) }
+        return resp.body['job_id']
       else
         return resp.body['errors']
       end
