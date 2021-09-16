@@ -34,6 +34,22 @@ module IdentityApiClient
       @lists ||= IdentityApiClient::Lists.new(client: self)
     end
 
+    def employment_data
+      @employment_data ||= IdentityApiClient::EmploymentData.new(client: self)
+    end
+
+    def workplaces
+      @workplaces ||= IdentityApiClient::Workplaces.new(client: self)
+    end
+
+    def industries
+      @industries ||= IdentityApiClient::Industries.new(client: self)
+    end
+
+    def professions
+      @professions ||= IdentityApiClient::Professions.new(client: self)
+    end
+
     private
 
     def extract_data_from_params(params)
