@@ -7,12 +7,16 @@ require 'identity-api-client/mailing_api_base'
 
 require 'identity-api-client/actions'
 require 'identity-api-client/client'
+require 'identity-api-client/employment_data'
+require 'identity-api-client/industries'
 require 'identity-api-client/lists'
 require 'identity-api-client/mailing'
 require 'identity-api-client/mailings'
 require 'identity-api-client/member'
+require 'identity-api-client/professions'
 require 'identity-api-client/search'
 require 'identity-api-client/searches'
+require 'identity-api-client/workplaces'
 
 module IdentityApiClient
   extend Vertebrae::Base
