@@ -1,7 +1,7 @@
 module IdentityApiClient
   class Workplaces < Base
     def list
-      resp = client.get_request(route_url("/api/workplaces?api_token=#{client.connection.configuration.options[:api_token]}"))
+      resp = client.get_request("/api/workplaces?api_token=#{client.connection.configuration.options[:api_token]}")
       if resp.status == 200
         return resp.body
       else
@@ -10,7 +10,7 @@ module IdentityApiClient
     end
 
     def approved
-      resp = client.get_request(route_url("/api/workplaces/approved?api_token=#{client.connection.configuration.options[:api_token]}"))
+      resp = client.get_request("/api/workplaces/approved?api_token=#{client.connection.configuration.options[:api_token]}")
       if resp.status == 200
         return resp.body
       else
@@ -23,7 +23,7 @@ module IdentityApiClient
         'api_token' => client.connection.configuration.options[:api_token],
         'workplace' => workplace
       }
-      resp = client.post_request(route_url('/api/workplaces'), params)
+      resp = client.post_request('/api/workplaces', params)
       if resp.status < 400
         return resp.body
       else

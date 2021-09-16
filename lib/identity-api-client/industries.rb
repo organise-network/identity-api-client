@@ -1,7 +1,7 @@
 module IdentityApiClient
   class Industries < Base
     def list
-      resp = client.get_request(route_url("/api/industries?api_token=#{client.connection.configuration.options[:api_token]}"))
+      resp = client.get_request("/api/industries?api_token=#{client.connection.configuration.options[:api_token]}")
       if resp.status == 200
         return resp.body
       else
@@ -10,7 +10,7 @@ module IdentityApiClient
     end
 
     def approved
-      resp = client.get_request(route_url("/api/industries/approved?api_token=#{client.connection.configuration.options[:api_token]}"))
+      resp = client.get_request("/api/industries/approved?api_token=#{client.connection.configuration.options[:api_token]}")
       if resp.status == 200
         return resp.body
       else
@@ -23,7 +23,7 @@ module IdentityApiClient
         'api_token' => client.connection.configuration.options[:api_token],
         'industry' => industry
       }
-      resp = client.post_request(route_url('/api/industries'), params)
+      resp = client.post_request('/api/industries', params)
       if resp.status < 400
         return resp.body
       else

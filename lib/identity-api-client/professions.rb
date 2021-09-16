@@ -1,7 +1,7 @@
 module IdentityApiClient
   class Professions < Base
     def list
-      resp = client.get_request(route_url("/api/professions?api_token=#{client.connection.configuration.options[:api_token]}"))
+      resp = client.get_request("/api/professions?api_token=#{client.connection.configuration.options[:api_token]}")
       if resp.status == 200
         return resp.body
       else
@@ -14,7 +14,7 @@ module IdentityApiClient
         'api_token' => client.connection.configuration.options[:api_token],
         'profession' => profession
       }
-      resp = client.post_request(route_url('/api/professions'), params)
+      resp = client.post_request('/api/professions', params)
       if resp.status < 400
         return resp.body
       else

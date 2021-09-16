@@ -1,7 +1,7 @@
 module IdentityApiClient
   class EmploymentData < Base
     def list
-      resp = client.get_request(route_url("/api/employment?api_token=#{client.connection.configuration.options[:api_token]}"))
+      resp = client.get_request("/api/employment?api_token=#{client.connection.configuration.options[:api_token]}")
       if resp.status == 200
         return EmploymentDataResult.new(resp.body)
       else
