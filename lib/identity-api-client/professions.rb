@@ -15,7 +15,7 @@ module IdentityApiClient
         'profession' => profession
       }
       resp = client.post_request('/api/professions', params)
-      if resp.status < 400
+      if resp.status == 200
         return resp.body
       else
         return resp.body['errors']

@@ -24,7 +24,7 @@ module IdentityApiClient
         'industry' => industry
       }
       resp = client.post_request('/api/industries', params)
-      if resp.status < 400
+      if resp.status == 200
         return resp.body
       else
         return resp.body['errors']
