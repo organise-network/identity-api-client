@@ -14,11 +14,8 @@ module IdentityApiClient
     attr_reader :employment_statuses, :approved_workplaces, :approved_industries, :approved_professions
 
     def initialize(body)
-      @employment_statuses = body.employment_statuses.map.with_index do |employment_status, i|
-        {
-          slug: employment_status,
-          label: body.employment_status_labels[i]
-        }
+      @employment_statuses = body.employment_status_labels.map do |slug, label|
+        { slug: slug, label: label }
       end
 
       @approved_workplaces = body.workplaces
