@@ -1,5 +1,25 @@
 module IdentityApiClient
   class Actions < Base
+    def create_member_action(attributes)
+      attributes['api_token'] = client.connection.configuration.options[:api_token]
+      resp = client.post_request("/api/actions/", attributes)
+      if resp.status == 200
+        return true
+      else
+        return false
+      end
+    end
+
+    def create_action(attributes)
+      attributes['api_token'] = client.connection.configuration.options[:api_token]
+      resp = client.post_request("/api/actions/create_without_member", attributes)
+      if resp.status == 200
+        return true
+      else
+        return false
+      end
+    end
+
     def find_by(action_attributes)
       resp = client.get_request("/api/actions/find_by", query: action_attributes)
       if resp.status == 200
