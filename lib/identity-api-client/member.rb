@@ -20,5 +20,22 @@ module IdentityApiClient
       resp = client.post_request('/api/member/details', params)
       resp.body
     end
+
+    def create_trace(email:, kind:, details:, happened_at:)
+      payload = {
+        email: email,
+        kind: kind,
+        details: details,
+        happened_at: happened_at,
+        api_token: client.connection.configuration.options[:api_token]
+      }
+
+      resp = client.post_request('/api/member_traces', payload)
+      if resp.status == 200
+        return true
+      else
+        return false
+      end
+    end
   end
 end
