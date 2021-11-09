@@ -10,6 +10,16 @@ module IdentityApiClient
       end
     end
 
+    def create_action(attributes)
+      attributes['api_token'] = client.connection.configuration.options[:api_token]
+      resp = client.post_request("/api/actions/create_without_member", attributes)
+      if resp.status == 200
+        return true
+      else
+        return false
+      end
+    end
+
     def create_network_action(attributes)
       attributes['api_token'] = client.connection.configuration.options[:api_token]
       resp = client.post_request("/api/actions/create_network_action", attributes)
