@@ -2,7 +2,7 @@ module IdentityApiClient
   class Actions < Base
     def create_member_action(attributes)
       attributes['api_token'] = client.connection.configuration.options[:api_token]
-      resp = client.post_request("/api/member_actions/", attributes)
+      resp = client.post_request("/api/member_actions/create", attributes)
       if resp.status == 200
         return true
       else
