@@ -37,5 +37,15 @@ module IdentityApiClient
         return false
       end
     end
+
+    def upsert_member(attributes)
+      attributes['api_token'] = client.connection.configuration.options[:api_token]
+      resp = client.put_request("/api/member/upsert", attributes)
+      if resp.status == 200
+        return resp.body
+      else
+        return false
+      end
+    end
   end
 end
