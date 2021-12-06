@@ -57,6 +57,15 @@ module IdentityApiClient
       end
     end
 
+    def recent_sign_comments(hours_ago = 4)
+      resp = client.get_request("/api/actions/recent_sign_comments?api_token=#{api_token}&hours_ago=#{hours_ago}")
+      if resp.status == 200
+        return resp.body
+      else
+        false
+      end
+    end
+
     private
 
     def api_token
