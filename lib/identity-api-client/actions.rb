@@ -51,7 +51,7 @@ module IdentityApiClient
     # If neither from_time nor hours_ago are provided, Identity will default hours_ago
     # to 4 (ie. search from 4 hours ago up until now).
 
-    def recently_updated(from_time:, to_time:, hours_ago:)
+    def recently_updated(from_time: nil, to_time: nil, hours_ago: nil)
       query_params = recent_api_query_params(from_time, to_time, hours_ago)
       resp = client.get_request("/api/actions/recently_updated", query: query_params)
       if resp.status == 200
@@ -61,7 +61,7 @@ module IdentityApiClient
       end
     end
 
-    def recently_taken(from_time:, to_time:, hours_ago:)
+    def recently_taken(from_time: nil, to_time: nil, hours_ago: nil)
       query_params = recent_api_query_params(from_time, to_time, hours_ago)
       resp = client.get_request("/api/actions/recently_taken", query: query_params)
       if resp.status == 200
@@ -71,7 +71,7 @@ module IdentityApiClient
       end
     end
 
-    def recent_sign_comments(from_time:, to_time:, hours_ago:)
+    def recent_sign_comments(from_time: nil, to_time: nil, hours_ago: nil)
       query_params = recent_api_query_params(from_time, to_time, hours_ago)
       resp = client.get_request("/api/actions/recent_sign_comments", query: query_params)
       if resp.status == 200
