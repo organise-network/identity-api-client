@@ -53,7 +53,7 @@ module IdentityApiClient
 
     def recently_updated(from_time: nil, to_time: nil, hours_ago: nil)
       query_params = recent_api_query_params(from_time, to_time, hours_ago)
-      resp = client.get_request("/api/actions/recently_updated", query: query_params)
+      resp = client.get_request("/api/actions/recently_updated", query_params)
       if resp.status == 200
         return resp.body
       else
@@ -63,7 +63,7 @@ module IdentityApiClient
 
     def recently_taken(from_time: nil, to_time: nil, hours_ago: nil)
       query_params = recent_api_query_params(from_time, to_time, hours_ago)
-      resp = client.get_request("/api/actions/recently_taken", query: query_params)
+      resp = client.get_request("/api/actions/recently_taken", query_params)
       if resp.status == 200
         return resp.body
       else
@@ -73,7 +73,7 @@ module IdentityApiClient
 
     def recent_sign_comments(from_time: nil, to_time: nil, hours_ago: nil)
       query_params = recent_api_query_params(from_time, to_time, hours_ago)
-      resp = client.get_request("/api/actions/recent_sign_comments", query: query_params)
+      resp = client.get_request("/api/actions/recent_sign_comments", query_params)
       if resp.status == 200
         return resp.body
       else
