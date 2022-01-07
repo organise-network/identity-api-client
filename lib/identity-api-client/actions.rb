@@ -39,8 +39,21 @@ module IdentityApiClient
       end
     end
 
-    def recently_updated(hours_ago = 4)
-      resp = client.get_request("/api/actions/recently_updated?api_token=#{api_token}&hours_ago=#{hours_ago}")
+    # The following 'recent...' methods all use the same input params.
+    #
+    # If from_time is present, Identity will search for the relevant data starting at the
+    # given timestamp. Identity will search up to the timestamp given in to_time (or up
+    # to now, if to_time is not present).
+    #
+    # If from_time is not present, Identity will search for the relevant data starting
+    # from the X hours ago, as given by the hours_ago param, and up to now.
+    #
+    # If neither from_time nor hours_ago are provided, Identity will default hours_ago
+    # to 4 (ie. search from 4 hours ago up until now).
+
+    def recently_updated(from_time: nil, to_time: nil, hours_ago: nil)
+      query_params = recent_api_query_params(from_time, to_time, hours_ago)
+      resp = client.get_request("/api/actions/recently_updated", query_params)
       if resp.status == 200
         return resp.body
       else
@@ -48,8 +61,9 @@ module IdentityApiClient
       end
     end
 
-    def recently_taken(hours_ago = 4)
-      resp = client.get_request("/api/actions/recently_taken?api_token=#{api_token}&hours_ago=#{hours_ago}")
+    def recently_taken(from_time: nil, to_time: nil, hours_ago: nil)
+      query_params = recent_api_query_params(from_time, to_time, hours_ago)
+      resp = client.get_request("/api/actions/recently_taken", query_params)
       if resp.status == 200
         return resp.body
       else
@@ -57,8 +71,9 @@ module IdentityApiClient
       end
     end
 
-    def recent_sign_comments(hours_ago = 4)
-      resp = client.get_request("/api/actions/recent_sign_comments?api_token=#{api_token}&hours_ago=#{hours_ago}")
+    def recent_sign_comments(from_time: nil, to_time: nil, hours_ago: nil)
+      query_params = recent_api_query_params(from_time, to_time, hours_ago)
+      resp = client.get_request("/api/actions/recent_sign_comments", query_params)
       if resp.status == 200
         return resp.body
       else
@@ -70,6 +85,15 @@ module IdentityApiClient
 
     def api_token
       client.connection.configuration.options[:api_token]
+    end
+
+    def recent_api_query_params(from_time, to_time, hours_ago)
+      {
+        'api_token' => api_token,
+        'from_time' => from_time,
+        'to_time' => to_time,
+        'hours_ago' => hours_ago
+      }
     end
   end
 end
