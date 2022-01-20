@@ -59,6 +59,9 @@ module IdentityApiClient
 
     # Return Identity member_guid if the API call succeeded and the provided
     # login token was valid; false otherwise
+    #
+    # Note that Identity returns the member_guid as a JSON object / hash, eg:
+    # { member_guid: '1234567890' }
     def validate_login_token(login_token, user_ip = nil)
       payload = {
         login_token: login_token,
