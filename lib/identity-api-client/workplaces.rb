@@ -32,10 +32,10 @@ module IdentityApiClient
     end
 
     def update_single_member(email:, created_at:, originator:, **employment_data)
-      required_employment_data = %i{employment_status employer industry profession} # Must have at least one of these
-      permitted_employment_data = required_employment_data.merge(%i{other_emp_status})
-
       raise(ArgumentError, 'email must be present & non-nil') unless email
+
+      required_employment_data = %i{employment_status employer industry profession} # Must have at least one of these
+      permitted_employment_data = required_employment_data.concat(%i{other_emp_status})
 
       if required_employment_data.none? { |key| employment_data.key?(key) }
         raise(ArgumentError, 'at least one of employment_status, employer, industry or profession must be passed')
