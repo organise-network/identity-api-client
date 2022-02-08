@@ -5,6 +5,7 @@ require spec.gem_dir + '/lib/api.rb'
 require 'identity-api-client/base'
 require 'identity-api-client/mailing_api_base'
 
+require 'identity-api-client/action'
 require 'identity-api-client/actions'
 require 'identity-api-client/client'
 require 'identity-api-client/lists'
