@@ -61,8 +61,9 @@ module IdentityApiClient
       end
     end
 
-    def recently_taken(from_time: nil, to_time: nil, hours_ago: nil)
+    def recently_taken(from_time: nil, to_time: nil, hours_ago: nil, only_unique_members: nil)
       query_params = recent_api_query_params(from_time, to_time, hours_ago)
+      query_params.merge!({only_unique_members: 'true'}) if only_unique_members
       resp = client.get_request("/api/actions/recently_taken", query_params)
       if resp.status == 200
         return resp.body
