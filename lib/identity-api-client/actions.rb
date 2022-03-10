@@ -43,7 +43,8 @@ module IdentityApiClient
     # 'recent...' methods below.
     #
     def find_by_network_id(network_id)
-      resp = client.get_request("/api/actions/find_by_network_id", query: {network_id: network_id})
+      query_params = {network_id: network_id, api_token: api_token}
+      resp = client.get_request("/api/actions/find_by_network_id", query_params)
       if resp.status == 200
         return resp.body
       else
