@@ -42,8 +42,8 @@ module IdentityApiClient
     # This shares some logic with find_by above, but returns in the same format as the
     # 'recent...' methods below.
     #
-    def find_by_network_id(network_id)
-      query_params = {network_id: network_id, api_token: api_token}
+    def find_by_network_id(network_id, excluded_action_types = nil)
+      query_params = {network_id: network_id, api_token: api_token, excluded_action_types: excluded_action_types}
       resp = client.get_request("/api/actions/find_by_network_id", query_params)
       if resp.status == 200
         return resp.body
