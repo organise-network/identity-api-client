@@ -42,7 +42,7 @@ module IdentityApiClient
     # This shares some logic with find_by above, but returns in the same format as the
     # 'recent...' methods below.
     #
-    def find_by_external_id(external_id, external_system)
+    def find_by_external_id(external_id:, external_system:)
       query_params = {
         external_id: external_id,
         external_system: external_system,
