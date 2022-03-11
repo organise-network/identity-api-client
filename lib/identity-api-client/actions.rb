@@ -39,6 +39,23 @@ module IdentityApiClient
       end
     end
 
+    # This shares some logic with find_by above, but returns in the same format as the
+    # 'recent...' methods below.
+    #
+    def find_by_external_id(external_id:, external_system:)
+      query_params = {
+        external_id: external_id,
+        external_system: external_system,
+        api_token: api_token
+      }
+      resp = client.get_request("/api/actions/find_by_external_id", query_params)
+      if resp.status == 200
+        return resp.body
+      else
+        false
+      end
+    end
+
     # The following 'recent...' methods all use the same input params.
     #
     # If from_time is present, Identity will search for the relevant data starting at the
