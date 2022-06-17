@@ -29,12 +29,13 @@ module IdentityApiClient
     end
 
     # Return true if the API call succeeded, false otherwise
-    def create_trace(email:, kind:, details:, happened_at:)
+    def create_trace(email:, kind:, happened_at:, details: '', ip_address: nil)
       payload = {
         email: email,
         kind: kind,
         details: details,
         happened_at: happened_at,
+        ip_address: ip_address,
         api_token: client.connection.configuration.options[:api_token]
       }
 
