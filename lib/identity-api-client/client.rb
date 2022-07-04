@@ -50,6 +50,10 @@ module IdentityApiClient
       @professions ||= IdentityApiClient::Professions.new(client: self)
     end
 
+    def interests
+      @interests ||= IdentityApiClient::Interests.new(client: self)
+    end
+
     private
 
     def extract_data_from_params(params)
