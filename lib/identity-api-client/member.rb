@@ -3,13 +3,17 @@ module IdentityApiClient
     # Return a hash of member data if the API call succeeded (which will be an
     # empty hash if the member was not found in Identity), or false if the API
     # call failed
-    def details(guid: nil, email: nil, load_current_consents: false, load_employment: false)
+    def details(guid: nil, email: nil, country: false, load_current_consents: false, load_employment: false)
       if guid.present?
         params = {'guid' => guid, 'api_token' => client.connection.configuration.options[:api_token]}
       elsif email.present?
         params = {'email' => email, 'api_token' => client.connection.configuration.options[:api_token]}
       else
         raise "Must have one of guid or email"
+      end
+
+      if country
+        params['country'] = true
       end
 
       if load_current_consents
