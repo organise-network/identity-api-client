@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<vertebrae>.freeze, [">= 0"])
+      s.add_runtime_dependency(%q<vertebrae>.freeze, ["~> 0.7"])
       s.add_development_dependency(%q<pry>.freeze, [">= 0"])
       s.add_development_dependency(%q<pry-byebug>.freeze, [">= 0"])
       s.add_development_dependency(%q<webmock>.freeze, [">= 0"])
@@ -60,7 +60,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
       s.add_development_dependency(%q<simplecov>.freeze, [">= 0"])
     else
-      s.add_dependency(%q<vertebrae>.freeze, [">= 0"])
+      s.add_dependency(%q<vertebrae>.freeze, ["~> 0.7"])
       s.add_dependency(%q<pry>.freeze, [">= 0"])
       s.add_dependency(%q<pry-byebug>.freeze, [">= 0"])
       s.add_dependency(%q<webmock>.freeze, [">= 0"])
@@ -71,7 +71,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<simplecov>.freeze, [">= 0"])
     end
   else
-    s.add_dependency(%q<vertebrae>.freeze, [">= 0"])
+    s.add_dependency(%q<vertebrae>.freeze, ["~> 0.7"])
     s.add_dependency(%q<pry>.freeze, [">= 0"])
     s.add_dependency(%q<pry-byebug>.freeze, [">= 0"])
     s.add_dependency(%q<webmock>.freeze, [">= 0"])
