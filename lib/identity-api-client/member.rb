@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module IdentityApiClient
   class Member < Base
     # Return a hash of member data if the API call succeeded (which will be an
@@ -5,60 +7,53 @@ module IdentityApiClient
     # call failed
     def details(guid: nil, email: nil, country: false, load_current_consents: false, load_employment: false)
       if guid.present?
-        params = {'guid' => guid, 'api_token' => client.connection.configuration.options[:api_token]}
+        params = { 'guid' => guid, 'api_token' => client.connection.configuration.options[:api_token] }
       elsif email.present?
-        params = {'email' => email, 'api_token' => client.connection.configuration.options[:api_token]}
+        params = { 'email' => email, 'api_token' => client.connection.configuration.options[:api_token] }
       else
-        raise "Must have one of guid or email"
+        raise 'Must have one of guid or email'
       end
 
-      if country
-        params['country'] = true
-      end
+      params['country'] = true if country
 
-      if load_current_consents
-        params['load_current_consents'] = true
-      end
+      params['load_current_consents'] = true if load_current_consents
 
-      if load_employment
-        params['load_employment'] = true
-      end
+      params['load_employment'] = true if load_employment
 
       resp = client.post_request('/api/member/details', params)
       if resp.status == 200
-        return resp.body
+        resp.body
       else
-        return false
+        false
       end
     end
 
     # Return true if the API call succeeded, false otherwise
-    def create_trace(email:, kind:, happened_at:, details: '', ip_address: nil)
+    def create_trace(email:, kind:, happened_at:, details: '', ip_address: nil, address: nil)
       payload = {
         email: email,
         kind: kind,
         details: details,
         happened_at: happened_at,
         ip_address: ip_address,
-        api_token: client.connection.configuration.options[:api_token]
-      }
+        api_token: client.connection.configuration.options[:api_token],
+        address: address
+      }.compact
 
       resp = client.post_request('/api/member_traces', payload)
-      if resp.status == 200
-        return true
-      else
-        return false
-      end
+      resp.status == 200
+    rescue Vertebrae::ResponseError => e
+      false
     end
 
     # Return a hash of member data if the API call succeeded, false otherwise
     def upsert_member(attributes)
       attributes['api_token'] = client.connection.configuration.options[:api_token]
-      resp = client.put_request("/api/member/upsert", attributes)
+      resp = client.put_request('/api/member/upsert', attributes)
       if resp.status == 200
-        return resp.body
+        resp.body
       else
-        return false
+        false
       end
     end
 
@@ -73,11 +68,11 @@ module IdentityApiClient
         user_ip: user_ip,
         api_token: client.connection.configuration.options[:api_token]
       }
-      resp = client.post_request("/api/member_login/verify_login_token", payload)
+      resp = client.post_request('/api/member_login/verify_login_token', payload)
       if resp.status == 200
-        return resp.body
+        resp.body
       else
-        return false
+        false
       end
     end
   end

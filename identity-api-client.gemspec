@@ -6,12 +6,12 @@
 
 Gem::Specification.new do |s|
   s.name = "identity-api-client".freeze
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Nathan Woodhull".freeze]
-  s.date = "2023-12-06"
+  s.date = "2023-12-12"
   s.description = "Provides a simple ruby binding to 38dgs identity API".freeze
   s.email = "nathan@controlshiftlabs.com".freeze
   s.extra_rdoc_files = [
