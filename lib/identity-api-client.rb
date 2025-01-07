@@ -23,8 +23,8 @@ module IdentityApiClient
   extend Vertebrae::Base
 
   class << self
-    def new(options = {}, &block)
-      IdentityApiClient::Client.new(options, &block)
+    def new(...)
+      IdentityApiClient::Client.new(...)
     end
   end
 end
