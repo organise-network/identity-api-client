@@ -30,8 +30,8 @@ module IdentityApiClient
       resp.status == 202
     end
 
-    def send_mailing(search_id)
-      resp = client.post_request(route_url("/api/mailings/#{id}/send"), {search_id: search_id})
+    def send_mailing(search_id = nil)
+      resp = client.post_request(route_url("/api/mailings/#{id}/send"), {search_id: search_id}.compact_blank)
       resp.status == 202
     end
   end
