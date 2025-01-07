@@ -63,6 +63,7 @@ module IdentityApiClient
     def default_options
       {
         user_agent: 'IdentityApiClient',
+        params: { api_token: self.initialisation_options[:api_token] }
       }
     end
 
