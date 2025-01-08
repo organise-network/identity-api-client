@@ -6,6 +6,10 @@ module IdentityApiClient
       @member ||= IdentityApiClient::Member.new(client: self)
     end
 
+    def members
+      @members ||= IdentityApiClient::Members.new(client: self)
+    end
+
     def mailings
       @mailings ||= IdentityApiClient::Mailings.new(client: self)
     end

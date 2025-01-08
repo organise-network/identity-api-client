@@ -2,23 +2,30 @@
 
 module IdentityApiClient
   class Member < Base
+    attr_accessor :id
+
+    def attributes
+      details
+    end
+
     # Return a hash of member data if the API call succeeded (which will be an
     # empty hash if the member was not found in Identity), or false if the API
     # call failed
-    def details(guid: nil, email: nil, country: false, load_current_consents: false, load_employment: false)
+    def details(guid: nil, email: nil, country: false, load_current_consents: false, load_actions: false, load_employment: false)
       if guid.present?
         params = { 'guid' => guid, 'api_token' => client.connection.configuration.options[:api_token] }
       elsif email.present?
-        params = { 'email' => email, 'api_token' => client.connection.configuration.options[:api_token] }
+        params = {'email' => email, 'api_token' => client.connection.configuration.options[:api_token]}
+      elsif id.present?
+        params = {'id' => id, 'api_token' => client.connection.configuration.options[:api_token]}
       else
         raise 'Must have one of guid or email'
       end
 
       params['country'] = true if country
-
       params['load_current_consents'] = true if load_current_consents
-
       params['load_employment'] = true if load_employment
+      params['load_actions'] = true if load_actions
 
       resp = client.post_request('/api/member/details', params)
       if resp.status == 200
