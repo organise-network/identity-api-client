@@ -21,5 +21,17 @@ module IdentityApiClient
         return resp.body['errors']
       end
     end
+
+    def clone_with_action(search_id, action_id)
+      params = {
+        'api_token' => client.connection.configuration.options[:api_token]
+      }
+      resp = client.post_request("/api/searches/#{search_id}/clone_with_action/#{action_id}", params)
+      if resp.status < 400
+        return IdentityApiClient::Search.new(client: client, id: resp.body['id'])
+      else
+        return resp.body['errors']
+      end
+    end
   end
 end
