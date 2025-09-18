@@ -13,6 +13,17 @@ module IdentityApiClient
       return resp.status == 202
     end
 
+    def create_from_redis(name, redis_id, callback_url)
+      params = {
+        'api_token' => client.connection.configuration.options[:api_token],
+        'name' => name,
+        'redis_id' => redis_id,
+        'callback_url' => callback_url
+      }
+      resp = client.post_request('/api/lists/create_from_redis', params)
+      return resp.status == 202
+    end
+
     def find_by_id(id)
       resp = client.get_request("/api/lists/#{id}?api_token=#{client.connection.configuration.options[:api_token]}")
       if resp.status == 200

@@ -45,6 +45,12 @@ module IdentityApiClient
       resp.status == 202
     end
 
+    def push_member_ids_to_redis(params = {})
+      params = { 'api_token' => client.connection.configuration.options[:api_token] }.merge(params)
+      resp = client.post_request("/api/searches/#{id}/push_member_ids_to_redis", params)
+      resp.status == 202
+    end
+
     def get_sample_member_ids(params = {})
       params = { 'api_token' => client.connection.configuration.options[:api_token] }.merge(params)
       resp = client.post_request("/api/searches/#{id}/get_sample_member_ids", params)
